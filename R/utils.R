@@ -1,0 +1,1 @@
+is_not_null <- function(x) !is.null(x)

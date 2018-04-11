@@ -1,0 +1,122 @@
+---
+output: rmarkdown::github_document
+---
+
+# varmint
+
+Retrieve Content from and Interact with 'Gopher' Servers
+
+## Description
+
+The 'Gopher' protocol is a 'TCP/IP' application layer protocol
+designed for distributing, searching, and retrieving documents over the 
+Internet. The 'Gopher' protocol was strongly oriented towards a menu-document 
+design and presented an alternative to the World Wide Web in its early 
+stages, but ultimately 'Hypertext Transfer Protocol' ('HTTP') became the 
+dominant protocol. The 'Gopher' ecosystem is often regarded as the effective
+predecessor of the 'World Wide Web'. Tools are provided to interact with
+and retrieve content from 'Gopher' servers.
+
+## What's Inside The Tin
+
+The following functions are implemented:
+
+- `gopher`:	Fetch a resource using the gopher protocol
+- `g_content`:	Retrieve the content portion of a gopher response
+
+## TODO
+
+- better handling of the `url` parameter to `gopher()`
+- handle `URL` selectors
+- handle content types
+- console gopher client
+- Shiny gopher client
+
+## Installation
+
+```{r eval=FALSE}
+devtools::install_github("hrbrmstr/varmint")
+```
+
+```{r message=FALSE, warning=FALSE, error=FALSE, include=FALSE}
+options(width=120)
+```
+
+## Usage
+
+```{r message=FALSE, warning=FALSE, error=FALSE}
+library(varmint)
+library(tidyverse)
+
+# current verison
+packageVersion("varmint")
+```
+
+### Take a peek at one of the only remaining Gopher servers in existence:
+
+```{r}
+x <- gopher("gopher.floodgap.com") 
+```
+
+```{r}
+str(x)
+```
+
+```{r}
+x
+```
+
+```{r}
+g_content(x, TRUE) %>% 
+  print(n = 20)
+```
+
+### See some other servers
+
+```{r}
+x1 <- gopher("gopher://gopher.floodgap.com", "/new") 
+```
+
+```{r}
+x1
+```
+
+```{r}
+g_content(x1, TRUE) %>% 
+  print(n = 20)
+```
+
+### Check out the Veronica menu
+
+```{r}
+x2 <- gopher("gopher://gopher.floodgap.com", "/v2") 
+```
+
+```{r}
+x2
+```
+
+```{r}
+g_content(x2, TRUE) %>% 
+  print(n = 20)
+```
+
+### Search for some XKCD comics
+
+```{r}
+x3 <- gopher("gopher://gopher.floodgap.com", "/v2/vs", "xkcd")
+```
+
+```{r}
+x3
+```
+
+```{r}
+g_content(x3, TRUE) %>% 
+  filter(item_type_descr == "info")
+```
+
+```{r}
+g_content(x3, TRUE) %>% 
+  filter(item_type_descr == "menu")
+```
