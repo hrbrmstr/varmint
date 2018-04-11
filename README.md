@@ -23,6 +23,7 @@ The following functions are implemented:
 
 ## TODO
 
+  - better handling of the `url` parameter to `gopher()`
   - handle `URL` selectors
   - handle content types
   - console gopher client
@@ -61,7 +62,7 @@ str(x)
     ##  $ status_code: int 0
     ##  $ headers    : raw [1:2] 0d 0a
     ##  $ modified   : POSIXct[1:1], format: NA
-    ##  $ times      : Named num [1:6] 0 0.000705 0.103423 0.103511 0.220162 ...
+    ##  $ times      : Named num [1:6] 0 0.000884 0.10787 0.107906 0.224019 ...
     ##   ..- attr(*, "names")= chr [1:6] "redirect" "namelookup" "connect" "pretransfer" ...
     ##  $ content    : raw [1:5588] 69 57 65 6c ...
     ##  $ ip         : chr "66.166.122.165"
